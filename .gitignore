@@ -129,5 +129,6 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-./dist
-./tsconfig
+.dist
+.tsconfig
+src/designPatterns

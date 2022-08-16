@@ -3,7 +3,7 @@ import { BinarySearchTree, BinaryNode } from "./dataStructures/collection/tree/B
 import { Iterator } from "./dataStructures/iterator/Iterator";
 import { ICompareable } from "./dataStructures/compare/ICompareable";
 
-function tailMirror(stack: Stack<BinaryNode<any>>): void {
+function tailMirror(stack: Stack<any>): void {
     const iterator = stack.iterator();
 
     if(!iterator.hasNext()) {
@@ -27,7 +27,7 @@ function tailMirror(stack: Stack<BinaryNode<any>>): void {
     tailMirror(stack);
 };
 
-class Person implements ICompareable<Person>{
+export class Person implements ICompareable<Person>{
     age: number;
 
     constructor(age: number) {
@@ -61,12 +61,12 @@ const roieTree: BinaryNode<Person> = {
 }
 
 
-const roieStack = new Stack<BinaryNode<Person>>();
-roieStack.push(roieTree);
+// const roieStack = new Stack<BinaryNode<Person>>();
+// roieStack.push(roieTree);
 
-console.log(`Before mirroring↓\nvalue: ${roieTree.value.age}\nleft: ${roieTree.left?.value.age}\nright: ${roieTree.right?.value.age}`);
+// console.log(`Before mirroring↓\nvalue: ${roieTree.value.age}\nleft: ${roieTree.left?.value.age}\nright: ${roieTree.right?.value.age}`);
 
-tailMirror(roieStack);
+// tailMirror(roieStack);
 
 
-console.log(`After mirroring↓\nvalue: ${roieTree.value.age}\nleft: ${roieTree.left?.value.age}\nright: ${roieTree.right?.value.age}`);
+// console.log(`After mirroring↓\nvalue: ${roieTree.value.age}\nleft: ${roieTree.left?.value.age}\nright: ${roieTree.right?.value.age}`);

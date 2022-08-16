@@ -1,5 +1,7 @@
 import { IList, ListItem } from "./IList";
 import { Iterable, Iterator } from "../../iterator/Iterator";
+import { ICompareable } from "../../compare/ICompareable";
+import { Person } from "../../../tail";
 
 class LinkedListItem<T> implements ListItem<T> {
     value: T;
@@ -11,7 +13,7 @@ class LinkedListItem<T> implements ListItem<T> {
     }
 }
 
-export class LinkedList<T> implements IList<T>, Iterable<T>{
+export class LinkedList<T extends ICompareable<T>> implements IList<T>, Iterable<T>{
 
     private head?: LinkedListItem<T>;
     private tail?: LinkedListItem<T>;
@@ -80,6 +82,81 @@ export class LinkedList<T> implements IList<T>, Iterable<T>{
 
     }
 
+    remove(item: T): boolean {
+        let previous: LinkedListItem<T>;
+        let currentItem = this.head;
+
+        while(currentItem) {
+            if(currentItem.value.compere(item) == 0) {
+                if(currentItem == this.head) {
+                    return this.removeFirst();
+                }
+
+                if(!currentItem.next) {
+                    this.tail = previous!;
+                    previous!.next = undefined
+                }
+
+                previous!.next = currentItem.next;
+
+                return true;
+
+            }
+
+            previous = currentItem;
+            currentItem = currentItem.next;
+        }
+
+        throw Error("***Item not defind***");
+    }
+
+    removeFirst(): boolean {
+        if(!this.head) {
+            console.error("***Unable to remove from empty list***");
+
+            return false;
+        }
+
+        if(!this.head?.next) {
+            this.head = undefined;
+            this.tail = this.head;
+
+            return true;
+        }
+
+        this.head = this.head.next;
+
+        return true;
+    }
+
+    removeLast(): boolean {
+        if(!this.head) {
+            console.error("***Unable to remove from empty list***");
+
+            return false;
+        }
+
+        let currentItem = this.head;
+
+        while(currentItem) {
+            if(currentItem == this.tail) {
+                this.head = undefined;
+                this.tail = undefined;
+
+                return true;
+            }
+
+            if(currentItem.next == this.tail) {
+                this.tail = currentItem;
+                currentItem.next = undefined;
+
+                return true;
+            }
+        }
+
+        throw Error("***Something worng***");
+    }
+
     pop(): T {
         const temp = this.head?.value;
 
@@ -145,18 +222,29 @@ export class LinkedList<T> implements IList<T>, Iterable<T>{
 }
 
 
-// const x = new LinkedList<number>();
+// const x = new LinkedList<Person>();
+// let p1 = new Person(10)
+// let p2 = new Person(20)
+// let p3 = new Person(30)
+// let p4 = new Person(40)
 
-// let iterator = x.iterator()
+
+// x.add(p1);
+// x.add(p2);
+// x.add(p3);
+// x.add(p4);
+
+// let iterator = x.iterator();
 
 // while(iterator.hasNext()) {
 //     const item = iterator.next();
 //     console.log(item);
 // }
 
-// x.add(1);
-// x.add(2);
-// x.add(3);
-// x.add(4);
+// x.removeLast();
+
+// console.log(x.traverse());
+// console.log("First" ,x.first());
+// console.log("Last" ,x.last());
 
 

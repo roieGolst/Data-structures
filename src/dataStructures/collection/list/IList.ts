@@ -1,5 +1,6 @@
 export interface IList<E> {
     add(val: E): void;
+    remove(item: E): void;
     get(index: number): E;  
     first(): E;
     last(): E;
