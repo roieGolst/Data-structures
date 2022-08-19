@@ -1,7 +1,6 @@
 import { Stack } from "./dataStructures/collection/stack/Stack";
 import { BinarySearchTree, BinaryNode } from "./dataStructures/collection/tree/BinarySerchTree";
 import { Iterator } from "./dataStructures/iterator/Iterator";
-import { ICompareable } from "./dataStructures/compare/ICompareable";
 
 function tailMirror(stack: Stack<any>): void {
     const iterator = stack.iterator();
@@ -27,7 +26,7 @@ function tailMirror(stack: Stack<any>): void {
     tailMirror(stack);
 };
 
-export class Person implements ICompareable<Person>{
+export class Person{
     age: number;
 
     constructor(age: number) {

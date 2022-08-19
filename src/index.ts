@@ -1,43 +1,56 @@
-interface IPerson {
-    getName(): string
-}
+// interface IPerson {
+//     getName(): string
+// }
 
-class Person implements IPerson {
-    private name: string;
-    private age: number;
+// class Person implements IPerson {
+//     private name: string;
+//     private age: number;
 
-    constructor(name: string, age: number) {
-        this.name = name,
-        this.age = age
-    }
+//     constructor(name: string, age: number) {
+//         this.name = name,
+//         this.age = age
+//     }
 
-    getName(): string {
-        return this.name;
-    }
+//     getName(): string {
+//         return this.name;
+//     }
 
-    static Builder = class {
-        private personName: string;
-        private personAge: number;
+//     static Builder = class {
+//         private personName: string;
+//         private personAge: number;
         
-        name(name: string) {
-            this.personName = name;
-            return this;
-        }
+//         name(name: string) {
+//             this.personName = name;
+//             return this;
+//         }
 
-        age(age: number) {
-            this.personAge = age;
-            return this;
-        }
+//         age(age: number) {
+//             this.personAge = age;
+//             return this;
+//         }
 
-        build() {
-            return new Person(this.personName, this.personAge); 
-        }
+//         build() {
+//             return new Person(this.personName, this.personAge); 
+//         }
+//     }
+// }
+
+// const roie: IPerson = new Person.Builder()
+//     .name("roie")
+//     .age(20)
+//     .build();
+
+// console.log(roie.getName());
+
+const x = 5;
+class A {
+    private lala: string;
+
+    constructor() {
+        this.lala = "hello world";
     }
 }
 
-const roie: IPerson = new Person.Builder()
-    .name("roie")
-    .age(20)
-    .build();
+let a = new A();
 
-console.log(roie.getName());
+console.log(JSON.stringify(a));

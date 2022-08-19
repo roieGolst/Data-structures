@@ -1,9 +1,8 @@
 import { IStack } from "./IStack";
 import { LinkedList } from "../list/LinkedList";
 import { Iterator } from "../../iterator/Iterator";
-import { ICompareable } from "../../compare/ICompareable";
 
-export class Stack<T extends ICompareable<T>> implements IStack<T>{
+export class Stack<T> implements IStack<T>{
 
     private linkedList = new LinkedList<T>();
 

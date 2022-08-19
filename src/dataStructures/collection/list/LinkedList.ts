@@ -1,11 +1,12 @@
 import { IList, ListItem } from "./IList";
 import { Iterable, Iterator } from "../../iterator/Iterator";
-import { ICompareable } from "../../compare/ICompareable";
+import { Compareable, CompareItem } from "../../compare/ICompareable";
 import { Person } from "../../../tail";
 
 class LinkedListItem<T> implements ListItem<T> {
     value: T;
-    next?: LinkedListItem<T>
+    next?: LinkedListItem<T>;
+    
 
     constructor(value: T, next?: LinkedListItem<T>) {
         this.value = value;
@@ -13,10 +14,15 @@ class LinkedListItem<T> implements ListItem<T> {
     }
 }
 
-export class LinkedList<T extends ICompareable<T>> implements IList<T>, Iterable<T>{
+export class LinkedList<T> implements IList<T>, Iterable<T>{
 
     private head?: LinkedListItem<T>;
     private tail?: LinkedListItem<T>;
+    private compare: Compareable<T>;
+
+    constructor(compareFun?: CompareItem) {
+        this.compare = new Compareable(compareFun)
+    }
 
     isEmpty(): boolean {
         return this.head == undefined;
@@ -87,7 +93,7 @@ export class LinkedList<T extends ICompareable<T>> implements IList<T>, Iterable
         let currentItem = this.head;
 
         while(currentItem) {
-            if(currentItem.value.compere(item) == 0) {
+            if(this.compare.equal(currentItem.value, item)) {
                 if(currentItem == this.head) {
                     return this.removeFirst();
                 }
@@ -157,6 +163,26 @@ export class LinkedList<T extends ICompareable<T>> implements IList<T>, Iterable
         throw Error("***Something worng***");
     }
 
+    contains(item: T): boolean {
+        let iterator = this.iterator();
+        let currentItem = iterator.next();
+
+        while(iterator.hasNext()) {
+            if(this.compare.equal(currentItem, item)) {
+                return true;
+            }
+
+            currentItem = iterator.next();
+        }
+
+        if(this.compare.equal(currentItem, item)) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     pop(): T {
         const temp = this.head?.value;
 
@@ -177,6 +203,38 @@ export class LinkedList<T extends ICompareable<T>> implements IList<T>, Iterable
         }
 
         return this.tail.value;
+    }
+
+    indexOf(item: T): number {
+        if(!this.contains(item)) {
+            throw Error("Item not found");
+        }
+
+        let iterator = this.iterator();
+        let currentItem = iterator.next();
+        let cunnter = 0;
+
+        while(iterator.hasNext()) {
+            if(this.compare.equal(currentItem, item)) {
+                return cunnter;
+            }
+
+            currentItem = iterator.next();
+            cunnter++;
+        }
+
+        if(this.compare.equal(currentItem, item)) {
+            return cunnter;
+        }
+        else{
+            throw Error("Something worng");;
+        }
+    }
+
+    search(item: any): T {
+        let index = this.indexOf(item);
+
+        return this.get(index);
     }
 
     traverse(): T[] {
@@ -221,7 +279,7 @@ export class LinkedList<T extends ICompareable<T>> implements IList<T>, Iterable
     }
 }
 
-
+//**********Test**********
 // const x = new LinkedList<Person>();
 // let p1 = new Person(10)
 // let p2 = new Person(20)
@@ -243,7 +301,7 @@ export class LinkedList<T extends ICompareable<T>> implements IList<T>, Iterable
 
 // x.removeLast();
 
-// console.log(x.traverse());
+// console.log(x.search(p3));
 // console.log("First" ,x.first());
 // console.log("Last" ,x.last());
 

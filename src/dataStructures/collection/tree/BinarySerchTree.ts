@@ -1,22 +1,24 @@
 import { Iterator } from "../../iterator/Iterator";
-import { ICompareable } from "../../compare/ICompareable";
+import { Compareable, CompareItem } from "../../compare/ICompareable";
 import { IBinaryTree, IBinaryNode } from "./IBinaryTree";
 
 
 
-export class BinaryNode<T extends ICompareable<T>> implements IBinaryNode<T>{
+export class BinaryNode<T> implements IBinaryNode<T>{
     public value: T;
     public left?: BinaryNode<T>;
     public right?: BinaryNode<T>;
+    // public compare?: Compareable<T>;
 
-    constructor(value: T, left?: BinaryNode<T>, right?: BinaryNode<T>) {
+    constructor(value: T, left?: BinaryNode<T>, right?: BinaryNode<T>, /*compareFun?: CompareItem*/) {
         this.value = value,
         this.left = left,
         this.right = right
+        // this.compare = new Compareable(compareFun);
     }
 }
 
-export class BinarySearchTree<T extends ICompareable<T>> implements IBinaryTree<T> {
+export class BinarySearchTree<T> implements IBinaryTree<T> {
     private root: BinaryNode<T>;
 
     contains(item: T): boolean {
