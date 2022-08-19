@@ -6,4 +6,3 @@ export interface IStack<T> extends Iterable<T> {
     pop(): T;
     peek(): T;
 }
-

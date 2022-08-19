@@ -112,6 +112,7 @@ export class BinarySearchTree<T> implements IBinaryTree<T> {
     }
 }
 
+//********Tests********//
 // const myTree = new BinarySearchTree<number>()
 
 // myTree.insert(10);

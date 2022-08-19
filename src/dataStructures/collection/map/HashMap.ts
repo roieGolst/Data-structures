@@ -77,13 +77,13 @@ export class HashMap<K ,V> implements IMap<K, V> {
     }
     
 }
+//********Tests********
+// let myMap: IMap<string, Person> = new HashMap<string, Person>();
 
-let myMap: IMap<string, Person> = new HashMap<string, Person>();
+// myMap.put("roie", new Person(20));
+// myMap.put("yoni", new Person(30));
+// myMap.put("yakir", new Person(27));
+// myMap.put("sari", new Person(59));
+// myMap.put("yehial", new Person(61));
 
-myMap.put("roie", new Person(20));
-myMap.put("yoni", new Person(30));
-myMap.put("yakir", new Person(27));
-myMap.put("sari", new Person(59));
-myMap.put("yehial", new Person(61));
-
-console.log(myMap);
+// console.log(myMap);

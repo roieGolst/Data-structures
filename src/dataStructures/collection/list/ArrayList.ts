@@ -46,6 +46,26 @@ export class ArrayList<T> implements IList<T>, Iterable<T>{
         return this.array[index];
     }
 
+    search(item: any): T {
+        let iterator = this.iterator();
+        let currentItem = iterator.next();
+
+        while(iterator.hasNext()) {
+            if(currentItem == item) {
+                return currentItem;
+            }
+
+            currentItem = iterator.next();
+        }
+
+        if(currentItem == item) {
+            return currentItem;
+        }
+        else{
+            throw Error("Item not defind");
+        }
+    }
+
     first(): T {
         return this.array[0];
     }
@@ -77,22 +97,25 @@ export class ArrayList<T> implements IList<T>, Iterable<T>{
     
 }
 
-let Iarray = new ArrayList<number>(8);
+// ********Tests********
+// let Iarray = new ArrayList<number>(8);
 
-Iarray.add(1);
-Iarray.add(2);
-Iarray.add(3);
-Iarray.add(4);
-Iarray.add(5);
-Iarray.add(6);
-Iarray.add(7);
-Iarray.add(8);
-Iarray.remove(3);
-Iarray.add(10);
+// Iarray.add(1);
+// Iarray.add(2);
+// Iarray.add(3);
+// Iarray.add(4);
+// Iarray.add(5);
+// Iarray.add(6);
+// Iarray.add(7);
+// Iarray.add(8);
+// Iarray.remove(3);
+// Iarray.add(10);
 
 
-let iterator = Iarray.iterator();
+// let iterator = Iarray.iterator();
 
-while(iterator.hasNext()) {
-    console.log([iterator.next()]);
-}
+// while(iterator.hasNext()) {
+//     console.log([iterator.next()]);
+// }
+
+// console.log(Iarray.search(4));

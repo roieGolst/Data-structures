@@ -37,6 +37,8 @@ export class Stack<T> implements IStack<T>{
     }
 }
 
+
+// *********Tests*********
 // const roieStack = new MyStack<number>();
 
 // roieStack.push(10);
