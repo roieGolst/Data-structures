@@ -89,7 +89,7 @@ export class LinkedList<T> implements IList<T>, Iterable<T>{
     }
 
     remove(item: T): boolean {
-        let previous: LinkedListItem<T>;
+        let previous = undefined;
         let currentItem = this.head;
 
         while(currentItem) {
@@ -99,11 +99,21 @@ export class LinkedList<T> implements IList<T>, Iterable<T>{
                 }
 
                 if(!currentItem.next) {
-                    this.tail = previous!;
-                    previous!.next = undefined
+                    if(!previous) {
+                        throw Error("Previous is Undefined");
+                    }
+
+                    this.tail = previous;
+                    previous.next = undefined;
+
+                    return true;
                 }
 
-                previous!.next = currentItem.next;
+                if(!previous) {
+                    throw Error("Previous is Undefined");
+                }
+
+                previous.next = currentItem.next;
 
                 return true;
 

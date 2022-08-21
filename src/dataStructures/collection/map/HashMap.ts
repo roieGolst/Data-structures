@@ -40,7 +40,7 @@ export class HashMap<K ,V> implements IMap<K, V> {
         this.buckets = new Array(size);
     }
 
-    get(key: K):any  {
+    get(key: K): V | HashNode<V> {
 
         if(!(typeof key === "string")) {
             throw Error("Key as must to be string to get hash code");
@@ -55,7 +55,7 @@ export class HashMap<K ,V> implements IMap<K, V> {
 
         let returnedValue = this.buckets[index].search(hashNumber);
 
-        return returnedValue;
+        return returnedValue.getValue();
     }
 
     put(key: K, value: V): void {
@@ -78,12 +78,12 @@ export class HashMap<K ,V> implements IMap<K, V> {
     
 }
 //********Tests********
-// let myMap: IMap<string, Person> = new HashMap<string, Person>();
+let myMap: IMap<string, Person> = new HashMap<string, Person>();
 
-// myMap.put("roie", new Person(20));
-// myMap.put("yoni", new Person(30));
-// myMap.put("yakir", new Person(27));
-// myMap.put("sari", new Person(59));
-// myMap.put("yehial", new Person(61));
+myMap.put("roie", new Person(20));
+myMap.put("yoni", new Person(30));
+myMap.put("yakir", new Person(27));
+myMap.put("sari", new Person(59));
+myMap.put("yehial", new Person(61));
 
-// console.log(myMap);
+console.log(myMap.get("roie"));
