@@ -1,18 +1,21 @@
 import { IList } from "./IList";
 import { Iterable, Iterator } from "../../iterator/Iterator";
+import { Compareable, CompareItem } from "../../compare/ICompareable";
 
 export class ArrayList<T> implements IList<T>, Iterable<T>{
     private array: T[];
     private arrayCpacity: number;
     private index: number = 0;
+    private compare: Compareable<T>;
 
-    constructor(arrayLength: number = 10, ) {
+    constructor(arrayLength: number = 10, compareFun?: CompareItem) {
         this.arrayCpacity = arrayLength
         this.array = new Array(arrayLength);
+        this.compare = new Compareable(compareFun);
     }
 
     add(val: T): void {
-        if(this.array.length == this.index) {
+        if(this.size() == this.index) {
             const newArray = new Array(this.array.length + this.arrayCpacity);
 
             for(let i in this.array) {
@@ -46,34 +49,31 @@ export class ArrayList<T> implements IList<T>, Iterable<T>{
         return this.array[index];
     }
 
-    search(item: any): T {
+    indexOf(item: any): number  {
         let iterator = this.iterator();
-        let currentItem = iterator.next();
+        let counter = 0;
 
         while(iterator.hasNext()) {
-            if(currentItem == item) {
-                return currentItem;
+            if(this.compare.equal(iterator.next(), item)) {
+                return counter;
             }
 
-            currentItem = iterator.next();
+            counter++;
         }
 
-        if(currentItem == item) {
-            return currentItem;
-        }
-        else{
-            throw Error("Item not defind");
-        }
+        return -1;
     }
 
     first(): T {
+        if(!this.array[0]) {
+            throw Error("List is empty");
+        }
+
         return this.array[0];
     }
 
     last(): T {
-        let length: number = this.array.length;
-
-        return this.array[length -1];
+        return this.array[this.size() -1];
     }
 
     size(): number {
@@ -94,28 +94,36 @@ export class ArrayList<T> implements IList<T>, Iterable<T>{
             }
         }
     }
+
+    forEach(cb: (cb: any) => any): void {
+        let iterator = this.iterator();
+
+        while(iterator.hasNext()) {
+            cb(iterator.next());
+        }
+
+        return;
+    }
     
 }
 
 // ********Tests********
-// let Iarray = new ArrayList<number>(8);
+// type x = number | undefined;
 
-// Iarray.add(1);
-// Iarray.add(2);
-// Iarray.add(3);
-// Iarray.add(4);
-// Iarray.add(5);
-// Iarray.add(6);
-// Iarray.add(7);
-// Iarray.add(8);
-// Iarray.remove(3);
-// Iarray.add(10);
+// let iArray = new ArrayList<x>();
+
+// iArray.add(1);
+// iArray.add(2);
+// iArray.add(3);
 
 
-// let iterator = Iarray.iterator();
+// let iterator = iArray.iterator();
 
-// while(iterator.hasNext()) {
-//     console.log([iterator.next()]);
+// while(iterator.hasNext()) {77
+//     iArray.remove(0);
+//     iArray.remove(0);
+//     iArray.remove(0);
+//     console.log(iterator.next());
 // }
 
 // console.log(Iarray.search(4));

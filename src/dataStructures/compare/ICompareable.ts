@@ -2,6 +2,8 @@ export type CompareItem = any | number | string;
 interface ICompareable<CompareItem> {
     compere(item: CompareItem): number
 }
+
+export type EqualsFunction<T> = (item: T) => boolean;
 export  class Compareable<T> {
     compare: (itemA: CompareItem, itemB: CompareItem) => number;
 
@@ -21,6 +23,8 @@ export  class Compareable<T> {
     }
 
     equal(itemA: T | number | string, itemB: T | number | string): boolean {
+        if(itemA === itemB) return true;
+        
         return this.compare(itemA, itemB) == 0;
     }
 

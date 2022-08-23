@@ -32,4 +32,8 @@ export class Queue<E> implements IQueue<E> {
             }
         }
     }
+
+    forEach(cb: (cb: any) => any): void {
+        this.linkedList.forEach(cb);
+    }
 }

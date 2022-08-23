@@ -4,9 +4,10 @@ export interface IList<E> {
     get(index: number): E;  
     first(): E;
     last(): E;
-    search(item: any): E;
+    indexOf(item: any): number;
 }
 
 export interface ListItem<E> {
     value: E;
+    next?: ListItem<E>;
 }
