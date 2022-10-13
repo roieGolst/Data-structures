@@ -22,6 +22,10 @@ export class Stack<T> implements IStack<T>{
         return this.linkedList.pop();
     }
 
+    forEach(cb: (cb: any) => any): void {
+        this.linkedList.forEach(cb);
+    }
+
     iterator(): Iterator<T> {
         const stack = this;
 

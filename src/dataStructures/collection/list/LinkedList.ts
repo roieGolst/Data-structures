@@ -1,4 +1,4 @@
-import { IList, ListItem } from "./IList";
+import { IList } from "./IList";
 import { Iterable, Iterator } from "../../iterator/Iterator";
 import { Compareable, CompareItem, EqualsFunction } from "../../compare/ICompareable";
 
@@ -95,7 +95,7 @@ export class LinkedList<T> implements IList<T>, Iterable<T>{
         let currentItem = this.head;
 
         while(currentItem) {
-            if(this.compare.equal(currentItem.value, item)) {
+            if(this.compare.equals(currentItem.value, item)) {
                 if(currentItem == this.head) {
                     return this.removeFirst();
                 }

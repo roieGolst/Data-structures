@@ -54,7 +54,7 @@ export class ArrayList<T> implements IList<T>, Iterable<T>{
         let counter = 0;
 
         while(iterator.hasNext()) {
-            if(this.compare.equal(iterator.next(), item)) {
+            if(this.compare.equals(iterator.next(), item)) {
                 return counter;
             }
 

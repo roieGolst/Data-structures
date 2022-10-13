@@ -22,7 +22,7 @@ export  class Compareable<T> {
         return -1;
     }
 
-    equal(itemA: T | number | string, itemB: T | number | string): boolean {
+    equals(itemA: T | number | string, itemB: T | number | string): boolean {
         if(itemA === itemB) return true;
         
         return this.compare(itemA, itemB) == 0;
@@ -37,10 +37,10 @@ export  class Compareable<T> {
     }
     
     lessThanOrEqual(itemA: CompareItem, itemB: CompareItem): boolean {
-        return this.lessThan(itemA, itemB) || this.equal(itemA, itemB);
+        return this.lessThan(itemA, itemB) || this.equals(itemA, itemB);
     }
     
     greaterThanOrEqual(itemA: CompareItem, itemB: CompareItem): boolean {
-        return this.greaterThan(itemA, itemB) || this.equal(itemA, itemB);
+        return this.greaterThan(itemA, itemB) || this.equals(itemA, itemB);
     }
 }
