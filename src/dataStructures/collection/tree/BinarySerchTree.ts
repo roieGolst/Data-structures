@@ -1,5 +1,4 @@
-import { Iterator } from "../../iterator/Iterator";
-import { Compareable, CompareItem } from "../../compare/ICompareable";
+import { Iterator } from "../../../designPatterns/iterator/Iterator";
 import { IBinaryTree, IBinaryNode } from "./IBinaryTree";
 
 
@@ -22,10 +21,46 @@ export class BinarySearchTree<T> implements IBinaryTree<T> {
     private root: BinaryNode<T>;
 
     contains(item: T): boolean {
-        throw new Error("Method not implemented.");
+        const iterator = this.iterator();
+
+        while(iterator.hasNext()) {
+            const nodeVal = iterator.next();
+
+            return nodeVal === item;
+        }
+
+        return false;
     }
+
     iterator(): Iterator<T> {
-        throw new Error("Method not implemented.");
+        let stack: BinaryNode<T>[] = []
+
+        return {
+       
+        next: (): T => {
+            let res = stack.pop();
+
+            if(!res) {
+                throw new Error("Out of bound");
+            }
+
+            if(res.right) {
+                let cur: BinaryNode<T> | undefined = res.right;
+
+                while(cur) {
+                    stack.push(cur);
+                    cur = cur.left
+                }
+            }   
+
+            return res.value;
+        },
+    
+        hasNext: (): boolean => {
+            return stack.length !== 0;
+        }
+
+        }
     }
 
     insert(item: T): void {
@@ -67,7 +102,7 @@ export class BinarySearchTree<T> implements IBinaryTree<T> {
     };
 
     search(item: T): BinaryNode<T> | undefined {
-        return undefined;
+        throw new Error("Method not implemented yet")
     }
         
 
@@ -101,6 +136,14 @@ export class BinarySearchTree<T> implements IBinaryTree<T> {
         }
 
         currentNode = undefined;
+    }
+
+    forEach(cb: (cb: any) => any): void {
+        const iterator = this.iterator();
+
+        while(iterator.hasNext()) {
+            cb(iterator.next());
+        }
     }
 
     private setLeft(currentNode: BinaryNode<T> ,item: T): void {
