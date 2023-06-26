@@ -1,4 +1,4 @@
-import { hashCode } from "../../utils/hashCode";
+import { hashCode } from "../../../utils/hashCode";
 import { LinkedList } from "../list/LinkedList";
 import { IMap } from "./IMap";
 

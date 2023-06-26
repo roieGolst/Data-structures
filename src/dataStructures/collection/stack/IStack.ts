@@ -1,4 +1,4 @@
-import { Iterable } from "../../iterator/Iterator";
+import { Iterable } from "../../../designPatterns/iterator/Iterator";
 
 export interface IStack<T> extends Iterable<T> {
     isEmpty(): boolean;

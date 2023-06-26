@@ -1,6 +1,6 @@
-import { IList } from "./IList";
-import { Iterable, Iterator } from "../../iterator/Iterator";
-import { Compareable, CompareItem } from "../../compare/ICompareable";
+import { IList } from "./IList";``
+import { Compareable, CompareItem } from "../../../common/ICompareable";
+import { Iterable, Iterator } from "../../../designPatterns/iterator/Iterator";
 
 export class ArrayList<T> implements IList<T>, Iterable<T>{
     private array: T[];

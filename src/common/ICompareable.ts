@@ -1,5 +1,6 @@
 export type CompareItem = any | number | string;
-interface ICompareable<CompareItem> {
+
+export interface ICompareable<CompareItem> {
     compere(item: CompareItem): number
 }
 

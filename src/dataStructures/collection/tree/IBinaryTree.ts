@@ -1,5 +1,4 @@
-import { Iterable } from "../../iterator/Iterator";
-import { Compareable } from "../../compare/ICompareable";
+import { Iterable } from "../../../designPatterns/iterator/Iterator";
 
 export interface IBinaryTree<T> extends Iterable<T>{
     insert(item: T): void;

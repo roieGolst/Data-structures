@@ -1,6 +1,6 @@
 import { IList } from "./IList";
-import { Iterable, Iterator } from "../../iterator/Iterator";
-import { Compareable, CompareItem, EqualsFunction } from "../../compare/ICompareable";
+import { Compareable, CompareItem, EqualsFunction } from "../../../common/ICompareable";
+import { Iterable, Iterator } from "../../../designPatterns/iterator/Iterator";
 
 class LinkedListItem<T> {
     value: T;
